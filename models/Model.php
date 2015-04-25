@@ -32,7 +32,7 @@ abstract class Model
     public function insert()
     {
         echo 'insert()<br>';
-        var_dump($this);
+        var_dump($this->magicProp);
         $class = static::class;
         foreach ($this->magicProp as $k => $v):
             echo $class . ' ' . $k . ' = ' . $v;
