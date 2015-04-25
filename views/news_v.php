@@ -10,8 +10,8 @@
     foreach ($items as $article ):
         ?>
     <div class="article">
-        <h3><a href="index.php?ctrl=news&method=showArticle&id=<?php echo $article['id'];?>"><?php echo $article['title'] . ' ' . $article['date']; ?></a></h3>
-        <?php echo $article['text']; ?>
+        <h3><a href="index.php?ctrl=news&method=showArticle&id=<?php echo $article->id;?>"><?php echo $article->title . ' ' . $article->date; ?></a></h3>
+        <?php echo $article->text; ?>
     </div>
 <?php
 endforeach; ?>

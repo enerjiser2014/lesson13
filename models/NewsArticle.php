@@ -1,13 +1,10 @@
 <?php
 
-require_once __DIR__ . '/Article.php';
+require_once __DIR__ . '/Model.php';
 
 class NewsArticle
-    extends Article
+    extends Model
 {
+    protected static $table = 'News';
 
-    protected function getTable()
-    {
-        return 'news';
-    }
-} 
+}

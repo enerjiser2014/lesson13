@@ -9,8 +9,7 @@ class NewsController
 {
     public function actionShowArticle() {
         $id = $_GET['id'];
-        $newsModel = new NewsArticle($this->siteConfig());
-        $this->view->items = $newsModel->getOneRecord($id);
+        $this->view->items = NewsArticle::getOneRecord($id);
         $this->view->display('article_v.php');
     }
     public function addArticle()
@@ -20,17 +19,16 @@ class NewsController
         $date = nl2br($_POST['date']);
         // здесь что-то, что обрабатывает $title, text, date перед отправкой
         $newsModel = new NewsArticle($this->siteConfig());
-        $newsModel->addArticle($title, $text, $date);
+        $newsModel->title = $title;
+        $newsModel->text = $text;
+        $newsModel->date = $date;
+        $newsModel->insert();
         $this->actionAll();
     }
     public function actionAll()
     {
-        $newsModel = new NewsArticle($this->siteConfig());
-        $this->view->items = $newsModel->getAllRecords();
+        $this->view->items = NewsArticle::getAllRecords();
         $this->view->display('news_v.php');
-        /*
-        $items = $newsModel->getAllRecords();
-        $this->render('news_v', ['items' => $items]);*/
     }
 
     protected function siteConfig()

@@ -1,6 +1,25 @@
 <?php
 
-require_once __DIR__ . '/models/NA.php';
+//require_once __DIR__ . '/models/NewsArticle.php';
 
-var_dump(NA::getTable());
 
+class A {
+    protected static $xxx='x';
+
+    public static function getxxx() {
+        return static::$xxx;
+    }
+}
+
+class B extends A {
+    protected static $xxx='y';
+}
+
+class C extends B {
+    protected static $xxx="c";
+
+}
+
+echo C::getxxx();
+
+//echo NewsArticle::getAllRecords();

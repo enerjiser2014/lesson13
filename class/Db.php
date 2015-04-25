@@ -2,37 +2,28 @@
 
 class Db
 {
+    protected $dbh;
     public function __construct($siteconfig)
     {
         $conf = include $siteconfig;
-        mysql_connect(
-            $conf['dbhost'],
-            $conf['dbuser'],
-            $conf['dbpassword']
-        );
-        mysql_select_db($conf['dbname']);
+        $dsn = 'mysql:dbname='. $conf['dbname'].';'. 'host='. $conf['dbhost'];
+        $this->dbh = new Pdo($dsn, $conf['dbuser'], $conf['dbpassword']);
     }
 
-    public function getRecords($sql)
+    public function getRecords($class, $sql, $params = [])
     {
-        $res = mysql_query($sql);
-        if (false === $res ) {
-            return false;
-        }
-        $ret = [];
-        while ($row = mysql_fetch_array($res)) {
-                $ret[] = $row;
-        }
-        return $ret;
+        $sth = $this->dbh->prepare($sql);
+        $sth->execute($params);
+        return $sth->fetchAll(PDO::FETCH_CLASS);
     }
 
-    public function getRecord($sql)
+    public function getRecord($class, $sql, $params = [])
     {
-        return $this->getRecords($sql)[0];
+        return $this->getRecords($class, $sql, $params )[0];
     }
 
     public function sqlExec($sql)
     {
-        return mysql_query($sql);
+        //return mysql_query($sql);
     }
 }
