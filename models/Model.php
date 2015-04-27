@@ -46,14 +46,31 @@ abstract class Model
                 VALUES
                 (' . '\'' . implode($vals, '\',\'') . '\' )
                 ';
-        echo $sql;
+
         $db = new Db(Conf::newsDb());
-        return $db->sqlExec($sql);
+        return $db->sqlExec(static::class, $sql);
     }
 
     public function update()
     {
+        if (false == $this->id) {
+            echo error;
+            exit;
+        }
 
+        $arr = [];
+        foreach($this->magicProp as $k => $v)
+        {
+            $arr[] = $k . '=\'' . $v . '\'';
+        }
+
+        $sql = 'UPDATE ' . static::getTable() . '
+                SET ' . implode(',', $arr) . '
+                WHERE id=\'' . $this->id . '\'';
+
+        $db = new Db(Conf::newsDb());
+
+        return $db->sqlExec(static::class, $sql);
     }
 }
 

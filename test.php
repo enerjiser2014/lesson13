@@ -1,7 +1,5 @@
 <?php
 
-//require_once __DIR__ . '/models/NewsArticle.php';
-
 
 class A {
     protected static $xxx='x';

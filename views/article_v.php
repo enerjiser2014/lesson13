@@ -10,5 +10,6 @@
     <div class="article">
             <?php echo $items->text; ?>
     </div>
+    <a href="./index.php">назад</a>
 </body>
 </html>

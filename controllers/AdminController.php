@@ -8,11 +8,6 @@ class AdminController
     public function actionAdd()
     {
         $this->addArticle();
-        unset($_POST);
     }
 
-    public function actionDelete()
-    {
-        return false;
-    }
 }

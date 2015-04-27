@@ -3,9 +3,8 @@
 class Db
 {
     protected $dbh;
-    public function __construct($siteconfig)
+    public function __construct($conf)
     {
-        $conf = include $siteconfig;
         $dsn = 'mysql:dbname='. $conf['dbname'].';'. 'host='. $conf['dbhost'];
         $this->dbh = new Pdo($dsn, $conf['dbuser'], $conf['dbpassword']);
     }
@@ -14,7 +13,7 @@ class Db
     {
         $sth = $this->dbh->prepare($sql);
         $sth->execute($params);
-        return $sth->fetchAll(PDO::FETCH_CLASS);
+        return $sth->fetchAll(PDO::FETCH_CLASS, $class);
     }
 
     public function getRecord($class, $sql, $params = [])
@@ -22,8 +21,11 @@ class Db
         return $this->getRecords($class, $sql, $params )[0];
     }
 
-    public function sqlExec($sql)
+    public function sqlExec($class, $sql,$params = [])
     {
-        //return mysql_query($sql);
+        $sth = $this->dbh->prepare($sql);
+        $sth->execute($params);
+        $sth->fetchAll(PDO::FETCH_CLASS, $class);
+        return $this->dbh->lastInsertId();
     }
 }

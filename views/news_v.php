@@ -15,7 +15,7 @@
     </div>
 <?php
 endforeach; ?>
-<a href="./controllers/form_c.php">Добавить новость</a>
+<a href="index.php?ctrl=admin&method=form">Добавить новость</a>
 
 <div class = "footer">
     <?php
