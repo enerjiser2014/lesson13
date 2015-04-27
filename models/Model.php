@@ -60,8 +60,7 @@ abstract class Model
     public function update()
     {
         if (false == $this->id) {
-            echo error;
-            exit;
+            throw new E404Exception('Невозможно обновить запись с несуществующим полем id');
         }
 
         $arr = [];

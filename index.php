@@ -12,8 +12,13 @@ $method = 'action' . ucfirst($method);
 
 //echo $ctrl . '<br>' . $method . '<br>';
 try {
-    $controller = new $ctrlClassName;
-    $controller->$method($itemsList);
-} catch (E404Exception $e) {
-    echo $e->getMessage();
+
+    try {
+        $controller = new $ctrlClassName;
+        $controller->$method($itemsList);
+    } catch (E404Exception $e) {
+        echo $e->getMessage();
+    }
+} catch (E403Exception $e) {
+    echo $e->redirect("error.php");
 }

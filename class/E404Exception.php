@@ -5,6 +5,6 @@ class E404Exception
 {
     public function redirect($name)
     {
-        header('Location: ./error.html');
+        header('Location: ./error.php');
     }
 }
