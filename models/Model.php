@@ -33,7 +33,13 @@ abstract class Model
     {
         $sql = 'SELECT * FROM ' . static::getTable() . ' WHERE id=:id';
         $db = new Db(Conf::newsDb());
-        return $db->getRecord(static::class, $sql, [':id' => $id]);
+        $ret = $db->getRecord(static::class, $sql, [':id' => $id]);
+        if (false != $ret) {
+            return $ret;
+        }
+        else {
+            throw new E404Exception('Не найдена запись в базе данных.');
+        }
     }
 
     public function insert()

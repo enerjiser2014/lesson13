@@ -11,5 +11,9 @@ $method = !empty($_GET['method']) ? $_GET['method'] : 'All';
 $method = 'action' . ucfirst($method);
 
 //echo $ctrl . '<br>' . $method . '<br>';
-$controller = new $ctrlClassName;
-$controller->$method($itemsList);
+try {
+    $controller = new $ctrlClassName;
+    $controller->$method($itemsList);
+} catch (E404Exception $e) {
+    echo $e->getMessage();
+}
