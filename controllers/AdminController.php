@@ -10,4 +10,10 @@ class AdminController
         $this->addArticle();
     }
 
+    public function ifAuthorized()
+    {
+        if ($_SESSION['auth'] != 'admin ') {
+            throw new E403Exception('Вам необходимо авторизоваться!');
+        }
+    }
 }
