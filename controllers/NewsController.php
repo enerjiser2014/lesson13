@@ -21,7 +21,7 @@ class NewsController
     }
     public function actionAll()
     {
-
+        echo 'hello action_all';
         $this->view->items = NewsArticle::getAllRecords();
         $this->view->display('news_v.php');
     }

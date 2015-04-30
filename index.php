@@ -16,7 +16,7 @@ try { // E403Exception
     try { // E404Exception
 
         $controller = new $ctrlClassName;
-        $controller->$method;
+        $controller->$method();
 
     }
 
