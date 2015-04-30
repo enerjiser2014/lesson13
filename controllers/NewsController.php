@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 class NewsController
-    extends \Controller
+    extends Controller
 {
     public function actionShowArticle() {
         $id = $_GET['id'];
@@ -21,6 +21,7 @@ class NewsController
     }
     public function actionAll()
     {
+
         $this->view->items = NewsArticle::getAllRecords();
         $this->view->display('news_v.php');
     }
