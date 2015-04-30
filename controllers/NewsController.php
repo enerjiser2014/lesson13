@@ -1,56 +1,62 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Models\NewsArticle as News;
+
+
 class NewsController
     extends Controller
 {
     public function actionShowArticle() {
         $id = $_GET['id'];
-        $this->view->items = NewsArticle::getOneRecord($id);
+        $this->view->items = News::getOneRecord($id);
         $this->view->display('article_v.php');
     }
     public function addArticle()
     {
-        $newsModel = new NewsArticle(Conf::newsDb());
+        $newsModel = new News(Conf::newsDb());
         $newsModel->title = $_POST['title'];
         $newsModel->text = nl2br($_POST['text']);
-        $newsModel->date = $_POST['date'];
+        $newsModel->date = date('Y-m-d H:i:s');
         $newsModel->insert();
         $this->actionAll();
     }
     public function actionAll()
     {
-        $this->view->items = NewsArticle::getAllRecords();
+        $this->view->items = News::getAllRecords();
         $this->view->display('news_v.php');
     }
 
     public function actionForm()
     {
         $id = $_GET['id'];
-        $this->view->items = NewsArticle::getAllRecords();
+        $this->view->items = News::getAllRecords();
         $this->view->display('form_v.php');
     }
 
     public function actionEdit()
     {
         $id = $_POST['id'];
-        $this->view->items = NewsArticle::getOneRecord($id);
+        $this->view->items = News::getOneRecord($id);
         $this->view->display('formedit_v.php');
     }
 
     public function actionUpdate($id)
     {
-        $model = new NewsArticle(Conf::newsDb());
+        $model = new News(Conf::newsDb());
         $model->id = $_GET['id'];
         $model->title=$_POST['title'];
         $model->text=nl2br($_POST['text']);
-        $model->date='27-04-2015';
+        $model->date=date('Y-m-d H:i:s');
         $model->update();
         $this->homePage();
     }
 
     protected  function homePage()
     {
-        header('Location: ./index.php');
+        header('Location:' . __DIR__ . '/../index.php');
+        header('Location:' . __DIR__ . '/../index.php');
     }
 
     protected function getTemplatePath() {

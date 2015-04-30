@@ -2,6 +2,14 @@
 
 function __autoload($class)
 {
+    if (false !== strpos($class, '\\')) {
+        $classNameParts = explode('\\', $class);
+        if ('App' == $classNameParts[0]) {
+            unset($classNameParts[0]);
+  //          echo $classNameParts = __DIR__ . '/' . implode('/', $classNameParts) . '.php';
+
+        }
+    }
     $paths = [
         __DIR__ . '/class',
         __DIR__ . '/controllers',

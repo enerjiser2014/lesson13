@@ -11,12 +11,12 @@ $method = !empty($_GET['method']) ? $_GET['method'] : 'All';
 $method = 'action' . ucfirst($method);
 
 //echo $ctrl . '<br>' . $method . '<br>';
-try {
+try { // E403Exception
 
-    try {
+    try { // E404Exception
 
         $controller = new $ctrlClassName;
-        $controller->$method($itemsList);
+        $controller->$method;
 
     }
 
@@ -24,7 +24,7 @@ try {
         echo $e->getMessage();
     }
 
-    
+
 } catch (E403Exception $e) {
-    echo $e->redirect("error.php");
+    echo $e->redirect(__DIR__ . "/error.php");
 }
